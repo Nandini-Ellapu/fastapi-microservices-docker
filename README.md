@@ -1,92 +1,162 @@
-# FastAPI Microservices with Docker and NGINX Gateway
+🚀 FastAPI Microservices with Docker, NGINX Gateway & AWS Deployment
 
-This project demonstrates a microservices architecture using FastAPI, Docker, Docker Compose, and NGINX as an API Gateway.  
-Each service runs independently and is routed through NGINX.
+A production-ready microservices architecture built using:
 
----
+FastAPI for backend services
 
-## Services Included
+Docker for containerization
 
-### User Service
-- Endpoint: /users
-- Port: 8001
+Docker Compose for orchestration
 
-### Product Service
-- Endpoint: /products
-- Port: 8002
+NGINX as API Gateway & Reverse Proxy
 
-### Order Service
-- Endpoint: /orders
-- Port: 8003
+AWS EC2 for cloud deployment
 
-### NGINX API Gateway
-Routes incoming traffic to the correct backend service.
+This project demonstrates how multiple independent services can run in isolated containers and communicate through a centralized gateway.
 
----
+📌 Features
 
-## Folder Structure
+✔ Three independent FastAPI microservices
+✔ Central NGINX API Gateway
+✔ Clean folder structure
+✔ Dockerized services with simple one-command startup
+✔ Cloud-ready (EC2, ECS, Azure, GCP, etc.)
+✔ Simplified routing and service discovery
+✔ Easily extendable (DB, Auth, CI/CD, Monitoring)
+
+🏗️ Architecture Overview
+                   +---------------------------+
+                   |     NGINX API Gateway     |
+                   |         (Port 80)         |
+                   +-------------+-------------+
+                                 |
+        ---------------------------------------------------
+        |                       |                         |
++---------------+     +-----------------+      +-----------------+
+| User Service  |     | Product Service |      | Order Service   |
+|   Port 8001   |     |    Port 8002    |      |    Port 8003    |
++---------------+     +-----------------+      +-----------------+
+
+
+NGINX receives client requests and forwards them to the correct backend service.
+
+📁 Folder Structure
 fastapi-microservices-docker/
+│
 ├── user-service/
 │   ├── main.py
 │   ├── requirements.txt
 │   └── Dockerfile
+│
 ├── product-service/
 │   ├── main.py
 │   ├── requirements.txt
 │   └── Dockerfile
+│
 ├── order-service/
 │   ├── main.py
 │   ├── requirements.txt
 │   └── Dockerfile
+│
 ├── nginx/
 │   └── default.conf
+│
 └── docker-compose.yml
 
----
+⚡ Microservices Overview
+👤 User Service
 
-## How to Run
+Returns a list of users.
+Route: /users
+Port: 8001
 
-### Clone the Repository
+📦 Product Service
+
+Returns product catalog.
+Route: /products
+Port: 8002
+
+🧾 Order Service
+
+Returns order details.
+Route: /orders
+Port: 8003
+
+🌐 NGINX API Gateway
+
+Handles all traffic to:
+
+/users → User Service
+
+/products → Product Service
+
+/orders → Order Service
+
+🐳 Run With Docker (Local or EC2)
+1️⃣ Clone the repository
 git clone https://github.com/Nandini-Ellapu/fastapi-microservices-docker.git
-
 cd fastapi-microservices-docker
-### Build and Start Containers
+
+2️⃣ Start all services
 docker compose up -d --build
-### Check Status
+
+3️⃣ Check running containers
 docker compose ps
----
 
-## API Endpoints
+🌍 API Endpoints
 
-Replace <SERVER-IP> with EC2 public IP:
-http://<SERVER-IP>/users
-http://<SERVER-IP>/products
-http://<SERVER-IP>/orders
----
+Replace <SERVER-IP> with your EC2 Public IP:
 
-## NGINX Configuration
+Service	URL
+Users	http://<SERVER-IP>/users
+Products	http://<SERVER-IP>/products
+Orders	http://<SERVER-IP>/orders
+🔧 NGINX Configuration (default.conf)
 server {
-listen 80;
-location /users/ {
-    proxy_pass http://user-service:8001/;
+    listen 80;
+
+    location /users/ {
+        proxy_pass http://user-service:8001/;
+    }
+
+    location /products/ {
+        proxy_pass http://product-service:8002/;
+    }
+
+    location /orders/ {
+        proxy_pass http://order-service:8003/;
+    }
 }
 
-location /products/ {
-    proxy_pass http://product-service:8002/;
-}
+🛠️ Tech Stack
 
-location /orders/ {
-    proxy_pass http://order-service:8003/;
-}
-}
----
+FastAPI
 
-## Skills Demonstrated
+Python 3.11
 
-- FastAPI
-- Docker & Docker Compose
-- Microservices Architecture
-- NGINX Reverse Proxy
-- Cloud (AWS EC2)
-- Git & GitHub
-  
+Docker & Docker Compose
+
+NGINX
+
+AWS EC2
+
+Linux (Ubuntu)
+
+🚀 Future Enhancements (Recommended for Portfolio)
+
+Add PostgreSQL or MongoDB
+
+JWT Authentication (Login/Register)
+
+CI/CD Pipeline (GitHub Actions or Azure DevOps)
+
+Monitoring with Prometheus + Grafana
+
+Deploy on AWS ECS Fargate / Azure Container Apps
+
+Add HTTPS using Certbot or AWS Load Balancer
+
+👩‍💻 Author
+
+Nandini Ellapu
+FastAPI | Docker | Microservices | DevOps | Cloud
