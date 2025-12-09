@@ -57,45 +57,43 @@ Endpoint: /orders
 
 Runs on port 8003
 
-NGINX API Gateway
+NGINX Gateway
 
-Routes incoming traffic:
+Routes:
 
 /users    → user-service:8001
 /products → product-service:8002
 /orders   → order-service:8003
 
-How to Run the Project
+Run the Project
 1. Clone the Repository
 git clone https://github.com/Nandini-Ellapu/fastapi-microservices-docker.git
 cd fastapi-microservices-docker
 
-2. Build and Start All Services
+2. Build & Start Containers
 docker compose up -d --build
 
-3. Check Running Containers
+3. Check Running Services
 docker compose ps
 
 API Endpoints
 
-Use your EC2 Public IP:
+Replace <SERVER-IP> with EC2 Public IP:
 
 http://<SERVER-IP>/users
 http://<SERVER-IP>/products
 http://<SERVER-IP>/orders
 
-NGINX Configuration (default.conf)
+NGINX Configuration
 server {
     listen 80;
 
     location /users/ {
         proxy_pass http://user-service:8001/;
     }
-
     location /products/ {
         proxy_pass http://product-service:8002/;
     }
-
     location /orders/ {
         proxy_pass http://order-service:8003/;
     }
@@ -105,9 +103,9 @@ Skills Demonstrated
 
 FastAPI
 
-Microservices Architecture
-
 Docker & Docker Compose
+
+Microservices Architecture
 
 NGINX Reverse Proxy
 
@@ -117,23 +115,6 @@ Linux
 
 Git & GitHub
 
-Containerized API Development
-
-Future Improvements
-
-JWT Authentication
-
-Database Integration (PostgreSQL)
-
-Monitoring (Prometheus + Grafana)
-
-HTTPS with Certbot or AWS Load Balancer
-
-CI/CD Pipeline (GitHub Actions or Azure DevOps)
-
-Deploy using Kubernetes
-
 Author
 
 Nandini Ellapu
-FastAPI | Docker | Microservices | DevOps | Cloud
