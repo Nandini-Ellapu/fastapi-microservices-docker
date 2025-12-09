@@ -1,26 +1,21 @@
-🚀 FastAPI Microservices with Docker & NGINX Gateway
+FastAPI Microservices with Docker & NGINX Gateway
 
 A complete microservices project built using FastAPI, Docker, Docker Compose, and NGINX as an API Gateway.
-This project demonstrates how to run multiple backend services behind a single gateway in a cloud environment such as AWS EC2.
+This project demonstrates how to run multiple backend services behind a single gateway on a cloud server such as AWS EC2.
 
-🧱 Project Architecture
-         ┌─────────────────┐
-         │  User Service   │ → FastAPI (Port 8001)
-         └─────────────────┘
-                   │
-                   ▼
-         ┌─────────────────┐
-Client → │   NGINX API     │ → Routes to /users, /products, /orders
-         │     Gateway     │ → Exposes Port 80
-         └─────────────────┘
-                   │
- ┌─────────────────┴─────────────────┬─────────────────┐
- │                                   │                 │
- ▼                                   ▼                 ▼
-User Service                   Product Service     Order Service
-(Port 8001)                    (Port 8002)         (Port 8003)
+Project Architecture
+               ┌───────────────────┐
+               │ NGINX API Gateway │  ← Exposes port 80
+               └───────────────────┘
+                     │     │     │
+     ┌───────────────┘     │     └──────────────────────────┐
+     │                     │                                 │
+┌─────────────┐     ┌──────────────┐                ┌────────────────┐
+│ User Service│     │Product Service│                │ Order Service  │
+│  Port 8001  │     │  Port 8002   │                │   Port 8003    │
+└─────────────┘     └──────────────┘                └────────────────┘
 
-📁 Folder Structure
+Folder Structure
 fastapi-microservices-docker/
 │
 ├── user-service/
@@ -43,67 +38,53 @@ fastapi-microservices-docker/
 │
 └── docker-compose.yml
 
-⚡ Services Overview
-🧑‍🤝‍🧑 User Service
+Services Overview
+User Service
 
 Endpoint: /users
 
 Runs on port 8001
 
-Simple FastAPI service that returns a user list.
-
-📦 Product Service
+Product Service
 
 Endpoint: /products
 
 Runs on port 8002
 
-Returns product list.
-
-🧾 Order Service
+Order Service
 
 Endpoint: /orders
 
 Runs on port 8003
 
-Returns order details.
+NGINX API Gateway
 
-🌐 NGINX API Gateway
-
-Routes:
+Routes incoming traffic:
 
 /users    → user-service:8001
 /products → product-service:8002
 /orders   → order-service:8003
 
-
-Exposes port 80 to the internet.
-
-🐳 Run Project with Docker Compose
-1️⃣ Clone the Repository
+How to Run the Project
+1. Clone the Repository
 git clone https://github.com/Nandini-Ellapu/fastapi-microservices-docker.git
 cd fastapi-microservices-docker
 
-2️⃣ Build and Start All Microservices
+2. Build and Start All Services
 docker compose up -d --build
 
-3️⃣ Check Running Containers
+3. Check Running Containers
 docker compose ps
 
-🌍 API Endpoints
+API Endpoints
 
-Use your server IP (EC2 Public IP) or localhost:
+Use your EC2 Public IP:
 
-User Service
 http://<SERVER-IP>/users
-
-Product Service
 http://<SERVER-IP>/products
-
-Order Service
 http://<SERVER-IP>/orders
 
-🔧 NGINX Gateway Configuration
+NGINX Configuration (default.conf)
 server {
     listen 80;
 
@@ -120,22 +101,25 @@ server {
     }
 }
 
-🚀 Skills Demonstrated
+Skills Demonstrated
 
-✔ FastAPI
-✔ Microservices Architecture
-✔ Docker & Docker Compose
-✔ NGINX Reverse Proxy
-✔ AWS EC2 Deployment
-✔ Linux Commands
-✔ Git & GitHub
-✔ Containerized API development
+FastAPI
 
-This project is excellent for DevOps, Cloud (AWS/Azure), Backend, and Microservices portfolios.
+Microservices Architecture
 
-📌 Future Improvements
+Docker & Docker Compose
 
-You can enhance the project with:
+NGINX Reverse Proxy
+
+AWS EC2 Deployment
+
+Linux
+
+Git & GitHub
+
+Containerized API Development
+
+Future Improvements
 
 JWT Authentication
 
@@ -143,13 +127,13 @@ Database Integration (PostgreSQL)
 
 Monitoring (Prometheus + Grafana)
 
-HTTPS SSL (Certbot or AWS Load Balancer)
-
-Autoscaling using ECS or Kubernetes
+HTTPS with Certbot or AWS Load Balancer
 
 CI/CD Pipeline (GitHub Actions or Azure DevOps)
 
-👩‍💻 Author
+Deploy using Kubernetes
+
+Author
 
 Nandini Ellapu
-FastAPI | Docker | Microservices | DevOps | Cloud Enthusiast
+FastAPI | Docker | Microservices | DevOps | Cloud
